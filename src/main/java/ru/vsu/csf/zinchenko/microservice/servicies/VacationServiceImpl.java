@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.vsu.csf.zinchenko.microservice.DTO.SalaryAndDatesDTO;
 import ru.vsu.csf.zinchenko.microservice.config.ReaderConfiguration;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,20 +29,27 @@ public class VacationServiceImpl implements VacationService {
     }
 
     @Override
-    public float calculateVacationMoney(SalaryAndDatesDTO salaryAndDays) throws ParseException {
+    public float calculateVacationMoney(SalaryAndDatesDTO salaryAndDays) throws ParseException, IOException {
         float salaryForDay = getSalaryForDay(salaryAndDays.getAverageSalary());
-
-        return salaryForDay * getAmountVacationDays(salaryAndDays.getStartDate(),
+        long vacationDays = getAmountVacationDays(salaryAndDays.getStartDate(),
                 salaryAndDays.getEndDate());
+        if (vacationDays < 0){
+            throw new IOException();
+        }
+        return salaryForDay * vacationDays;
     }
 
     private long getAmountVacationDays(String startDay, String endDay) throws ParseException {
         Date startDate = parseStringToDate(startDay);
         Date endDate = parseStringToDate(endDay);
 
-        long diffInMillies = Math.abs(startDate.getTime() - endDate.getTime());
+        long diffInMillies = startDate.getTime() - endDate.getTime();
 
-        return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        if (diffInMillies > 0){
+            return -1;
+        }
+
+        return TimeUnit.DAYS.convert(Math.abs(diffInMillies), TimeUnit.MILLISECONDS);
     }
 
     private Date parseStringToDate(String startDay) throws ParseException {
