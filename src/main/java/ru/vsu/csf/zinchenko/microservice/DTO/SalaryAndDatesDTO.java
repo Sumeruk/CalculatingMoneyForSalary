@@ -1,18 +1,12 @@
 package ru.vsu.csf.zinchenko.microservice.DTO;
 
-import java.text.DateFormat;
-
-public class SalaryAndDaysDTO {
+public class SalaryAndDatesDTO {
     private float averageSalary;
-    private int vacationDays;
-
     private String startDate;
-
     private String endDate;
 
-    public SalaryAndDaysDTO(float averageSalary, int vacationDays, String startDate, String endDate) {
+    public SalaryAndDatesDTO(float averageSalary, String startDate, String endDate) {
         this.averageSalary = averageSalary;
-        this.vacationDays = vacationDays;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -25,13 +19,6 @@ public class SalaryAndDaysDTO {
         this.averageSalary = averageSalary;
     }
 
-    public int getVacationDays() {
-        return vacationDays;
-    }
-
-    public void setVacationDays(int vacationDays) {
-        this.vacationDays = vacationDays;
-    }
 
     public String getStartDate() {
         return startDate;

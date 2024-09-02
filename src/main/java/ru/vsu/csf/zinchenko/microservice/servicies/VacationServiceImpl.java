@@ -2,7 +2,7 @@ package ru.vsu.csf.zinchenko.microservice.servicies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.vsu.csf.zinchenko.microservice.DTO.SalaryAndDaysDTO;
+import ru.vsu.csf.zinchenko.microservice.DTO.SalaryAndDatesDTO;
 import ru.vsu.csf.zinchenko.microservice.config.ReaderConfiguration;
 
 import java.text.ParseException;
@@ -28,7 +28,7 @@ public class VacationServiceImpl implements VacationService {
     }
 
     @Override
-    public float calculateVacationMoney(SalaryAndDaysDTO salaryAndDays) throws ParseException {
+    public float calculateVacationMoney(SalaryAndDatesDTO salaryAndDays) throws ParseException {
         float salaryForDay = getSalaryForDay(salaryAndDays.getAverageSalary());
 
         return salaryForDay * getAmountVacationDays(salaryAndDays.getStartDate(),
