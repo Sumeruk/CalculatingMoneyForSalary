@@ -9,9 +9,6 @@ import ru.vsu.csf.zinchenko.microservice.servicies.VacationService;
 @SpringBootApplication
 public class MicroserviceApplication {
 
-    @Autowired
-    private VacationService service;
-
     public static void main(String[] args) {
         SpringApplication.run(MicroserviceApplication.class, args);
     }
