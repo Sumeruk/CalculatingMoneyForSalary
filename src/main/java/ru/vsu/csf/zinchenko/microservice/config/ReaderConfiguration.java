@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "api")
 public class ReaderConfiguration {
-    private int avgDaysInMonth;
+    private float avgDaysInMonth;
 
-    public int getAvgDaysInMonth() {
+    public float getAvgDaysInMonth() {
         return avgDaysInMonth;
     }
 
-    public void setAvgDaysInMonth(int avgDaysInMonth) {
+    public void setAvgDaysInMonth(float avgDaysInMonth) {
         this.avgDaysInMonth = avgDaysInMonth;
     }
 }
