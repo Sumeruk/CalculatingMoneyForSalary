@@ -11,6 +11,10 @@ public class SalaryAndDatesDTO {
         this.endDate = endDate;
     }
 
+    public SalaryAndDatesDTO() {
+
+    }
+
     public float getAverageSalary() {
         return averageSalary;
     }
@@ -18,7 +22,6 @@ public class SalaryAndDatesDTO {
     public void setAverageSalary(float averageSalary) {
         this.averageSalary = averageSalary;
     }
-
 
     public String getStartDate() {
         return startDate;

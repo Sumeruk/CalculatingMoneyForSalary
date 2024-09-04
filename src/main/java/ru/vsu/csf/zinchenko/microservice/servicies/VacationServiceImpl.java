@@ -6,6 +6,7 @@ import ru.vsu.csf.zinchenko.microservice.DTO.SalaryAndDatesDTO;
 import ru.vsu.csf.zinchenko.microservice.config.ReaderConfiguration;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class VacationServiceImpl implements VacationService {
     @Override
     public float calculateVacationMoney(float averageSalary, int vacationDays) {
         float salaryForDay = getSalaryForDay(averageSalary);
-        return salaryForDay * vacationDays;
+        return roundToTwoDecimalForFloat(salaryForDay * vacationDays);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class VacationServiceImpl implements VacationService {
         if (vacationDays < 0){
             throw new IOException();
         }
-        return salaryForDay * vacationDays;
+        return roundToTwoDecimalForFloat(salaryForDay * vacationDays);
     }
 
     private long getAmountVacationDays(String startDay, String endDay) throws ParseException {
@@ -58,5 +59,18 @@ public class VacationServiceImpl implements VacationService {
 
     private float getSalaryForDay(float averageSalary){
         return averageSalary / config.getAvgDaysInMonth();
+    }
+
+    private float roundToTwoDecimalForFloat(float number){
+        BigDecimal a = new BigDecimal(Math.round(number * 100));
+        a = a.movePointLeft(2);
+        return a.floatValue();
+    }
+
+    public VacationServiceImpl(ReaderConfiguration config) {
+        this.config = config;
+    }
+
+    public VacationServiceImpl() {
     }
 }
