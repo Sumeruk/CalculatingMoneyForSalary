@@ -69,8 +69,10 @@ public class VacationServiceImpl implements VacationService {
 
     public VacationServiceImpl(ReaderConfiguration config) {
         this.config = config;
+        dateFormat.setLenient(false);
     }
 
     public VacationServiceImpl() {
+        dateFormat.setLenient(false);
     }
 }
